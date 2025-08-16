@@ -1,0 +1,6 @@
+set macros (list "load_input")
+set files (list "load-input.lua"
+                "1.lemon"
+                ;; "machine.lua"   This should be built into the compiler itself.
+                )
+set machine "microcomp"

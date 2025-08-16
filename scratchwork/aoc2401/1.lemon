@@ -1,0 +1,59 @@
+def Character := Unsigned(8)
+def NEWLINE:Constant(Character) := 0x0a
+
+def input := load_input()
+
+// Not sure these would be able to read `input.size`. Haven't worked that out.
+def left := Buffer(Unsigned(24), input.size)
+def right := Buffer(Unsigned(24), input.size)
+
+def parseInput(left:Pointer(Buffer(Unsigned(24))), right:Pointer(Buffer(Unsigned(24))), input:Pointer(Input)) {
+	def index:Index := 0
+	for {
+		index := parseLine(input, &index)
+	}
+}
+
+def parseLine(input:Pointer(Input), index:Index):[Index, Unsigned(24), Unsigned(24)] {
+	def index := index_start
+	def character:Character := 0
+	for index != input.size {
+		index, leftInteger := parseUnsigned(input, index)
+		index := parseSpace(input, index)
+		index, rightInteger := parseUnsigned(input, index)
+		index := parseNewline(input, index)
+	}
+	return index, leftInteger, rightInteger
+}
+
+def parseUnsigned(input:Pointer(Input), start_index:Index):[Index, Unsigned(24)] {
+	def index := start_index
+	def multiplier:Unsigned(24) := 10000
+	def accumulator:Unsigned(24) := 0
+	for {
+		def digit:Unsigned(8) := 0
+		index, digit := parseDigit(input, index)
+		accumulator += multiplier * digit
+		def divisionError:DivisionError := OK
+		multiplier, divisionError /= 10
+		if divisionError = UNDERFLOW: break
+	}
+	return index, accumulator
+}
+
+def parseDigit(input:Pointer(Input), start_index:Index):[Index, Unsigned(8)] {
+	return start_index + 1, input[start_index] - '0'
+}
+
+def parseNewline(input:Pointer(Input), start_index:Index):Index {
+	return start_index + 1
+}
+
+def parseSpace(input:Pointer(Input), start_index:Index):Index {
+	return start_index + 3
+}
+
+def main() {
+	// Parse the text in `input` and put the integers in `left` and `right`.
+	parseInput(&left, &right, &input)
+}

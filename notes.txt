@@ -1,0 +1,23 @@
+The compiler will have a REPL. This is how you normally interact with it.
+The REPL will be shell-like if possible, with a VERB NOUN NOUN... syntax.
+Or maybe Lua is passed to it.
+compile("file", "file", ...)
+[[["action"]] = "compile"]
+add file_a
+add file_b
+add file_c
+compile
+add file_b
+compile
+analyze file_b
+
+Inspirations {
+  C
+  JavaScript
+  Lisp
+  Lunar
+  
+}
+
+Every statement/expression returns exactly one value. The form may return Nothing. It may return Values(form1, form2, ...)
+All functions are global.
