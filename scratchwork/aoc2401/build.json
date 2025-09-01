@@ -1,0 +1,4 @@
+{"macros": ["load_input"],
+ "source files": ["1.lemon", "aoclib.lemon"],
+ "extension files": ["load-input.lua"],
+ "machine": "microcomp"}

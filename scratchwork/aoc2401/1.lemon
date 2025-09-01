@@ -1,6 +1,3 @@
-def Character := Unsigned(8)
-def NEWLINE:Constant(Character) := 0x0a
-
 def input := load_input()
 
 // Not sure these would be able to read `input.size`. Haven't worked that out.

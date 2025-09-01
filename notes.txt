@@ -21,3 +21,7 @@ Inspirations {
 
 Every statement/expression returns exactly one value. The form may return Nothing. It may return Values(form1, form2, ...)
 All functions are global.
+
+
+C compiles each file in parallel. An object file is generated from each C file. The object files may contain assembly or even machine code. To make this possible, each file must include the (header) files that contain the type declarations of all symbols that they use. This has the disadvantage that if an included declaration does not have a matching definition in another C/object file, the linker will throw an error complaining that the symbol is undefined. This message looks different from typical undefined variable errors. Another disadvantage is that a change to an included file will require recompilation of all files that include it. I don't think this problem can be easily fixed.
+Lemon will have a similar system, but parallel compilation will stop immediately after the type system is run. Up to this point, undefined symbols will not throw errors. The final stage of compilation will happen afterward and all files will be compiled into one final file. The type system will be run again and this time there should be no errors. I expect this will be slower than C's compiles. "Linking" will actually be a major part of compilation. Any "object files" will have the ASTs along with type information.

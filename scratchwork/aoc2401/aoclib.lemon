@@ -1,0 +1,2 @@
+def Character := Unsigned(8)
+def NEWLINE:Constant(Character) := 0x0a
